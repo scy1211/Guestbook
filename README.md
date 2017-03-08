@@ -1,5 +1,5 @@
 # demo
-
+在线预览：[demo](https://yokaki.github.io/demos/vue/Guestbook/index.html)
 > A Vue.js project
 
 ## Build Setup
