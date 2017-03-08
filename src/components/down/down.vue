@@ -1,12 +1,39 @@
 <template>
   <div class="down">
-    3
+    <ul>
+      <li v-for="(item,index) in downArr" class="data-item">
+        <el-button type="primary"  size="mini" class="btn">
+          <i class="el-icon-document"></i>
+        </el-button>
+        {{item.dataItem}}
+      </li>
+    </ul>
   </div>
 </template>
 <script>
-  export default {}
+  import store from '../../../localstorage/store.everything.min'
+  export default {
+    data(){
+      return {
+        downArr: []
+      }
+    },
+    mounted:function () {
+      this.getDownArr()
+    },
+    methods: {
+      getDownArr(){
+        let localDownArr = store.get('downArr');
+        if (localDownArr) {
+          this.downArr = localDownArr;
+        } else {
+          this.downArr = [];
+        }
+      }
+    }
+  }
 </script>
 
 <style scoped>
-
+@import "../../assets/style/data-item.css";
 </style>

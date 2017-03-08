@@ -1,39 +1,82 @@
 <template>
   <div class="doing">
-    <input type="text" placeholder="接下来要做点什么" v-model="newData" @keyup.enter="addData" class="new-data">
+    <input type="text" placeholder="接下来要做点什么"
+           v-model="newData"
+           @keyup.enter="addData"
+           class="new-data">
     <ul>
-      <li v-for="(item,index) in dataArr" @mouseover="hover1" class="data-item">
-        <a href="javascript:" @click="check(index)" class="check-box"></a>
+      <li v-for="(item,index) in doingArr" class="data-item">
+        <el-button type="primary"  @click="check(index)" size="mini" class="btn">
+          <i class="el-icon-check"></i>
+        </el-button>
+
         {{item.dataItem}}
       </li>
     </ul>
+    <el-button type="danger"  @click="clear" class="clear-btn">清除
+      <i class="el-icon-delete el-icon--left"></i>
+    </el-button>
+
   </div>
 </template>
 <script>
-  import store from '../../../store/store.legacy.min'
+  import store from '../../../localstorage/store.everything.min'
   export default {
-    name: 'doing',
     data(){
       return {
-        newData: '',
-        dataArr: []
+        doingArr: [], allArr: [], downArr: [], newData: ''
       }
     },
-    mounted(){
-      this.dataArr = store.get('dataItem')
+    mounted: function () {
+      this.getDoingArr();
+      this.getAllArr();
+      this.getDownArr();
     },
     methods: {
       addData(){
-        this.dataArr.push({dataItem:this.newData});
-        this.newData = '';
-        store.set('dataItem', this.dataArr);
+        this.doingArr.push({dataItem: this.newData});
+        store.set('doingArr', this.doingArr);
+        this.allArr.push({dataItem: this.newData});
+        store.set('allArr', this.allArr);
+        this.newData = ''
+      },
+      getDoingArr(){
+        let localDoingArr = store.get('doingArr');
+        if (localDoingArr) {
+          this.doingArr = localDoingArr;
+        } else {
+          this.doingArr = [];
+        }
+      },
+      getAllArr(){
+        let localAllArr = store.get('allArr');
+        if (localAllArr) {
+          this.allArr = localAllArr;
+        } else {
+          this.allArr = [];
+        }
+      },
+      getDownArr(){
+        let localDownArr = store.get('downArr');
+        if (localDownArr) {
+          this.downArr = localDownArr;
+        } else {
+          this.downArr = [];
+        }
       },
       check(index){
-        this.dataArr.splice(index, 1);
-        store.set('dataItem', this.dataArr);
-      },
-      hover1(){
+        let downItem = this.doingArr[index];
+        this.downArr.push(downItem)
+        store.set('downArr', this.downArr)
+        this.doingArr.splice(index, 1);
+        store.set('doingArr', this.doingArr);
 
+      },
+      clear(){
+        store.clear();
+        this.doingArr = [];
+        this.allArr = [];
+        this.downArr = [];
       }
     }
   }
@@ -41,10 +84,16 @@
 
 <style scoped>
   .new-data {
-    width: 80%;
+    width: 96%;
     padding: 6px;
     outline: medium;
+    border: 2px solid #0ea1ee;
   }
-  .data-item{padding-bottom: 20px;}
-  .check-box{display: inline-block;width: 20px;height: 20px;border: 1px solid #0ea1ee;border-radius: 50%;position: relative;top: 6px;margin-right: 20px;}
+
+  .data-item {
+    padding-bottom: 20px;
+    line-height: 100%;
+  }
+.btn{margin-right: 10px;}
+.clear-btn{float: right;}
 </style>
