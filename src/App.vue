@@ -9,13 +9,13 @@
 
 <script>
   import header from './components/header/header.vue'
-  import store from './vuex/store'
+
   export default {
     name: 'app',
     components: {
       'v-header': header
-    },
-    store
+    }
+
 
   }
 </script>

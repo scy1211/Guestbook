@@ -2,7 +2,7 @@
   <div class="down">
     <ul>
       <li v-for="(item,index) in downArr" class="data-item">
-        <el-button type="primary"  size="mini" class="btn">
+        <el-button type="success"  size="mini" class="btn">
           <i class="el-icon-document"></i>
         </el-button>
         {{item.dataItem}}
