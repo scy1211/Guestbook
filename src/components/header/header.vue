@@ -1,18 +1,33 @@
 <template>
   <div class="header">
-    <router-link to="/doing"><span>待办</span></router-link>
-    <router-link to="/down"><span>已完成</span></router-link>
-    <router-link to="/all"><span>所有事项</span></router-link>
+    <router-link to="/doing">待办</router-link>
+    <router-link to="/down">已完成</router-link>
+    <router-link to="/all">所有事项</router-link>
   </div>
 </template>
 <script>
   export default {
-    name:'header'
+    name: 'header'
   }
 </script>
 
 <style scoped>
-.header{display: flex;align-items: center;justify-content: space-between;background-color: #0ea1ee;padding: 10px 0;}
-  a{width: 32%;text-align: center;color: #fff;}
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0ea1ee;
+
+  }
+
+  a {
+    width: 32%;
+    text-align: center;
+    color: #fff;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 4px solid #0ea1ee;
+  }
 
 </style>
