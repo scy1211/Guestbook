@@ -24,6 +24,6 @@
   @import "assets/style/normalize.css";
   ul{list-style: none;padding: 0;}
   a{text-decoration: none;}
-  #app {}
+  #app {font-size: 14px;font-family: '微软雅黑';color: #999;}
   .router-viwe{padding: 10px;}
 </style>

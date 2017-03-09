@@ -2,10 +2,13 @@
   <div class="all">
     <ul>
       <li v-for="(item,index) in allArr" class="data-item">
-        <el-button type="info" size="mini" class="btn">
-          <i class="el-icon-document"></i>
-        </el-button>
+        <span>
+          <el-button type="info" size="mini" class="btn">
+            <i class="el-icon-document"></i>
+          </el-button>
         {{item.dataItem}}
+        </span>
+        <span class="time">{{item.time}}</span>
       </li>
     </ul>
   </div>

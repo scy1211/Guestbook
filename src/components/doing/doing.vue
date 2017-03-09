@@ -6,25 +6,27 @@
            class="new-data">
     <ul>
       <li v-for="(item,index) in doingArr" class="data-item">
-        <el-button type="primary"  @click="check(index)" size="mini" class="btn">
+        <span><el-button type="primary" @click="check(index)" size="mini" class="btn">
           <i class="el-icon-check"></i>
         </el-button>
-
-        {{item.dataItem}}
+        {{item.dataItem}}</span>
+         <span class="time">{{item.time}}</span>
       </li>
     </ul>
-    <el-button type="danger"  @click="clear" class="clear-btn">清除
+    <el-button type="danger" @click="clear" class="clear-btn">清除
       <i class="el-icon-delete el-icon--left"></i>
     </el-button>
 
   </div>
 </template>
 <script>
+
   import store from '../../../localstorage/store.everything.min'
   export default {
     data(){
       return {
-        doingArr: [], allArr: [], downArr: [], newData: ''
+        doingArr: [], allArr: [], downArr: [], newData: '',
+        time: ''
       }
     },
     mounted: function () {
@@ -34,11 +36,11 @@
     },
     methods: {
       addData(){
-        this.doingArr.push({dataItem: this.newData});
+        this.doingArr.push({dataItem: this.newData,time:new Date().toLocaleString()});
         store.set('doingArr', this.doingArr);
-        this.allArr.push({dataItem: this.newData});
+        this.allArr.push({dataItem: this.newData,time:new Date().toLocaleString()});
         store.set('allArr', this.allArr);
-        this.newData = ''
+        this.newData = '';
       },
       getDoingArr(){
         let localDoingArr = store.get('doingArr');
@@ -64,6 +66,14 @@
           this.downArr = [];
         }
       },
+      getArr(arrName, localName){
+        let localArr = store.get(localName);
+        if (localArr) {
+          arrName = localArr;
+        } else {
+          arrName = [];
+        }
+      },
       check(index){
         let downItem = this.doingArr[index];
         this.downArr.push(downItem)
@@ -83,6 +93,8 @@
 </script>
 
 <style scoped>
+  @import "../../assets/style/data-item.css";
+
   .new-data {
     width: 96%;
     padding: 6px;
@@ -90,10 +102,8 @@
     border: 2px solid #0ea1ee;
   }
 
-  .data-item {
-    padding-bottom: 20px;
-    line-height: 100%;
+  .clear-btn {
+    float: right;
   }
-.btn{margin-right: 10px;}
-.clear-btn{float: right;}
+
 </style>
