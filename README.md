@@ -4,7 +4,7 @@
 
 开发过程中遇到的问题：
 
-- 可以在组件内部的script标签内引入外部js文件，但是要把外部的js文件放到根目录下,否则最后webpack打包会保存。
+- 可以在组件内部的script标签内引入外部js文件，但是要把外部的js文件放到根目录下,否则最后webpack打包会报错。
 
 ```js
 import store from '../../../localstorage/store.everything.min'
