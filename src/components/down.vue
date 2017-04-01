@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-  import store from '../../../localstorage/store.everything.min'
+  import store from '../../localstorage/store.everything.min'
   export default {
     data(){
       return {
@@ -38,5 +38,5 @@
 </script>
 
 <style scoped>
-@import "../../assets/style/data-item.css";
+@import "../assets/style/data-item.css";
 </style>

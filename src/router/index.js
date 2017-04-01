@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-import doing from '../components/doing/doing.vue'
-import all from '../components/all/all.vue'
-import down from '../components/down/down.vue'
+import doing from '../components/doing.vue'
+import all from '../components/all.vue'
+import down from '../components/down.vue'
 
 const doingC = doing
 const allgC = all

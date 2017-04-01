@@ -6,41 +6,56 @@
            class="new-data">
     <ul>
       <li v-for="(item,index) in doingArr" class="data-item">
-        <span><el-button type="primary" @click="check(index)" size="mini" class="btn">
+        <span>
+          <el-button type="primary" @click="check(index)" size="mini" class="btn">
           <i class="el-icon-check"></i>
         </el-button>
         {{item.dataItem}}</span>
-         <span class="time">{{item.time}}</span>
+        <span class="time">{{item.time}}</span>
       </li>
     </ul>
     <el-button type="danger" @click="clear" class="clear-btn">清除
       <i class="el-icon-delete el-icon--left"></i>
     </el-button>
-
+    <el-dialog title="提示" v-model="dialogVisible">
+      <span>添加事件不能为空！</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
   </div>
 </template>
 <script>
 
-  import store from '../../../localstorage/store.everything.min'
+  import store from '../../localstorage/store.everything.min'
   export default {
     data(){
       return {
         doingArr: [], allArr: [], downArr: [], newData: '',
-        time: ''
+        time: '',
+        dialogVisible: false
       }
     },
     mounted: function () {
+      let that = this;
+//      this.doingArr = this.getArr(that.doingArr, 'doingArr').arrName
+
       this.getDoingArr();
       this.getAllArr();
       this.getDownArr();
     },
     methods: {
       addData(){
-        this.doingArr.push({dataItem: this.newData,time:new Date().toLocaleString()});
-        store.set('doingArr', this.doingArr);
-        this.allArr.push({dataItem: this.newData,time:new Date().toLocaleString()});
-        store.set('allArr', this.allArr);
-        this.newData = '';
+        if (this.newData) {
+          this.doingArr.push({dataItem: this.newData, time: new Date().toLocaleString()});
+          store.set('doingArr', this.doingArr);
+          this.allArr.push({dataItem: this.newData, time: new Date().toLocaleString()});
+          store.set('allArr', this.allArr);
+          this.newData = '';
+        } else {
+          this.dialogVisible = true;
+        }
       },
       getDoingArr(){
         let localDoingArr = store.get('doingArr');
@@ -73,6 +88,7 @@
         } else {
           arrName = [];
         }
+        return arrName
       },
       check(index){
         let downItem = this.doingArr[index];
@@ -93,7 +109,7 @@
 </script>
 
 <style scoped>
-  @import "../../assets/style/data-item.css";
+  @import "../assets/style/data-item.css";
 
   .new-data {
     width: 96%;
