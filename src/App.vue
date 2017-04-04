@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-  import header from './components/header.vue'
+  import header from './components/header.vue' //引入头部
 
   export default {
     name: 'app',

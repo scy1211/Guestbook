@@ -14,12 +14,12 @@
   </div>
 </template>
 <script>
+  //引入localstorage库
   import store from '../../localstorage/store.everything.min'
-
   export default {
     data(){
       return {
-        allArr: []
+        allArr: [] //初始化所有的列表
       }
     },
     mounted: function () {
@@ -27,7 +27,7 @@
     },
     methods: {
       getAllArr(){
-        let localAllArr = store.get('allArr');
+        let localAllArr = store.get('allArr'); //页面初始化时，先尝试去localstorage去拿数据，没有数据则this.allArr为空。
         if (localAllArr) {
           this.allArr = localAllArr;
         } else {

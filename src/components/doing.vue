@@ -38,8 +38,6 @@
       }
     },
     mounted: function () {
-      let that = this;
-//      this.doingArr = this.getArr(that.doingArr, 'doingArr').arrName
 
       this.getDoingArr();
       this.getAllArr();
